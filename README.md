@@ -26,3 +26,14 @@ _ Next step is to consider using MONGODB
 
 #compilation 
 _ Python 
+
+#Activation process 
+python -m pip install mysql-connector-python
+
+#Django configuration
+py -3 -m venv .venv
+.venv\scripts\activate
+python -m pip install django
+
+#run server
+python manage.py runserver
