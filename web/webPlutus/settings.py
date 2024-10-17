@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'members' #Add our newly created app 'members' here to load it. Do the same for any futur apps
 ]
 
 MIDDLEWARE = [
