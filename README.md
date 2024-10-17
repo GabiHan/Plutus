@@ -37,3 +37,9 @@ python -m pip install django
 
 #run server
 python manage.py runserver
+
+#migrate 
+py manage.py migrate
+
+#make migrations 
+py manage.py makemigrations filename
