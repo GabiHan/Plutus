@@ -6,10 +6,10 @@ from django.db import models
 from datetime import date
 
 class Member(models.Model):
-    login = models.CharField(max_length=255, unique=True)
-    password = models.CharField(max_length=255)  
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
+    login = models.CharField(max_length=255, unique=True, default="Morose")
+    password = models.CharField(max_length=255, default="Hello123")  
+    firstname = models.CharField(max_length=255, default="Mor")
+    lastname = models.CharField(max_length=255, default="Morse")
 
 #Default values are set in age and birth to avoid the "non-nullable" error"
     age = models.PositiveIntegerField(default=18)
