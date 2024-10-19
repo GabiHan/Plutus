@@ -1,9 +1,25 @@
-from django.urls import path
+"""from django.urls import path, include
 from django.contrib import admin
+from members import views as members_views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    #path('', include('home.urls')),
+    #path('register/', members_views.Register, name ='register'),
+    #path('members/', include('members.urls')), 
+    
+]
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.members, name='members'),
-    path('members/', views.members, name='members'),
-    path('admin/', admin.site.urls),
+    path('', views.members, name='members-home'),  # This handles /members/
+    path('register/', views.Register, name='register'),  # This handles /members/register/
+]
+"""
+from django.urls import path
+from .views import register
+
+urlpatterns = [
+    path('register/', register, name='register'),
 ]
