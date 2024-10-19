@@ -1,7 +1,19 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages 
+from .forms import UserRegistrationForm
 
-def members(request):
-  template = loader.get_template('index.html')
-  return HttpResponse(template.render())
-# Here we are configuring the views of our app to load what's in our index.html
+
+#Define registration here 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            return redirect('home')  # Redirect to home after registration
+    else:
+        form = UserRegistrationForm()
+    return render(request, 'members/register.html', {'form': form})
+
+

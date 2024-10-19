@@ -3,6 +3,7 @@
 
 
 from django.db import models
+#from django.contrib.auth.models import User
 from datetime import date
 
 class Member(models.Model):
@@ -14,7 +15,6 @@ class Member(models.Model):
 #Default values are set in age and birth to avoid the "non-nullable" error"
     age = models.PositiveIntegerField(default=18)
     birth = models.DateField(default=date(2000, 1, 1))  
-
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"

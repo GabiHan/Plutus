@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Member 
 
-# Register your models here.
+# Make members visible on the admin interface
+admin.site.register(Member)
