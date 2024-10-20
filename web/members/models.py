@@ -12,12 +12,14 @@ class Member(models.Model):
     firstname = models.CharField(max_length=25)
     lastname = models.CharField(max_length=25)
     age = models.PositiveIntegerField()
-    birth = models.DateField()  
+    birth = models.DateField() 
+
+    wallet = models.ForeignKey(account, on_delete = models.CASCADE) 
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
 class account(models.Model):
-    id_money = models.ForeignKey(Member, on_delete = models.CASCADE)
+    id_money = models.models.PositiveIntegerField()
     add_money = models.CharField(max_length=255)
     date = models.DateField()
