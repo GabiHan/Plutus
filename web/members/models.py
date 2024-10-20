@@ -7,15 +7,17 @@ from django.db import models
 from datetime import date
 
 class Member(models.Model):
-    login = models.CharField(max_length=255, unique=True, default="Morose")
-    password = models.CharField(max_length=255, default="Hello123")  
-    firstname = models.CharField(max_length=255, default="Mor")
-    lastname = models.CharField(max_length=255, default="Morse")
-
-#Default values are set in age and birth to avoid the "non-nullable" error"
-    age = models.PositiveIntegerField(default=18)
-    birth = models.DateField(default=date(2000, 1, 1))  
+    login = models.CharField(max_length=25, unique=True, default="login")
+    password = models.CharField(max_length=25, default="0")  
+    firstname = models.CharField(max_length=25)
+    lastname = models.CharField(max_length=25)
+    age = models.PositiveIntegerField()
+    birth = models.DateField()  
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
 
+class account(models.Model):
+    id_money = models.ForeignKey(Member, on_delete = models.CASCADE)
+    add_money = models.CharField(max_length=255)
+    date = models.DateField()
