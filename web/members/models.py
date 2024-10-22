@@ -19,7 +19,7 @@ class Member(models.Model):
     age = models.PositiveIntegerField()
     birth = models.DateField() 
 
-    wallet = models.ForeignKey(account, on_delete = models.CASCADE) 
+    #wallet = models.ForeignKey(account, on_delete = models.CASCADE) 
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"
