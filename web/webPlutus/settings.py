@@ -37,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
     'tailwind',
     'style',
-    'django_browser_reload',
+    #'django_browser_reload',
     'home', #add home app
     'members', #Add our newly created app 'members' here to load it. Do the same for any futur apps
 ]
@@ -53,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #tailwind
+    #"django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'webPlutus.urls'
@@ -128,7 +129,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TAILWIND_APP_NAME = 'style'
  
 LOGIN_REDIRECT_URL = 'home'
