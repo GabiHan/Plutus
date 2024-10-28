@@ -1,0 +1,12 @@
+{
+  "name": "Plutus",
+  "version": "1.0.0",
+"scripts": {
+  "build": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+},
+  "devDependencies": {
+    "tailwindcss": "^2.x.x",
+    "postcss": "^8.x.x",
+    "autoprefixer": "^10.x.x"
+  }
+}
