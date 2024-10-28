@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
     path('members/', include('members.urls')),  # Placeholder for members app
-    #path("__reload__/", include("django_browser_reload.urls")),
+    path("django_browser_reload/", include("django_browser_reload.urls")),
 ]
 
 

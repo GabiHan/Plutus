@@ -3,5 +3,32 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>Welcome to the Home Page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}  <!-- Load the static template tag -->
+    <link href="{% static './static/css/output.css' %}" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+    <div class="text-center">
+        <header class="bg-blue-600 text-white p-4">
+            <h1 class="text-2xl">Welcome to My Django App</h1>
+        </header>
+
+        <main class="p-8">
+            <h2 class="text-xl font-semibold">Home Page</h2>
+            <p class="mt-4 text-gray-700">This is a simple home page styled with Tailwind CSS!</p>
+
+            <div class="mt-6">
+                <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Get Started</a>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
 {% endblock %}

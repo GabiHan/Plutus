@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailwind',
     'style',
-    #'django_browser_reload',
+    'django_browser_reload',
     'home', #add home app
     'members', #Add our newly created app 'members' here to load it. Do the same for any futur apps
 ]
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #tailwind
-    #"django_browser_reload.middleware.BrowserReloadMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'webPlutus.urls'
@@ -138,4 +138,7 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm"  # Adjust based on your actual path
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"  # Adjust based on your actual path
+
+STATIC_URL = '/static/'
+
