@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'tailwind',
     'django_browser_reload',
+=======
+>>>>>>> main
     'home', #add home app
     'members', #Add our newly created app 'members' here to load it. Do the same for any futur apps
 ]
