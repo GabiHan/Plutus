@@ -1,13 +1,16 @@
-from django import forms 
-from django.contrib.auth.models import User
-from members.models import Member
-
+from django import forms
+from .models import Member, MemberManager, UserProfile
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput, label= "Set a paswword")
-    #config
+    password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = Member
-        fields = ['login', 'password','firstname', 'lastname', 'age', 'birth']
+        fields = ['login', 'firstname', 'lastname', 'age', 'password']  # Add all necessary fields
 
-
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])  # Ensure password is hashed
+        if commit:
+            user.save()
+        return user
