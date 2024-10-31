@@ -1,26 +1,58 @@
-# Create our database models here. By default, django already has SQL tables all set up
-#All we need to do is define items. Do py manage.py migrate to execute the table 
-
-
 from django.db import models
-#from django.contrib.auth.models import User
-from datetime import date
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-class account(models.Model):
-    id_money = models.PositiveIntegerField()
-    add_money = models.CharField(max_length=255)
-    date = models.DateField()
 
-class Member(models.Model):
-    login = models.CharField(max_length=25, unique=True, default="login")
-    password = models.CharField(max_length=25, default="0")  
+class MemberManager(BaseUserManager):
+    def create_user(self, login, password=None, **extra_fields):
+        if not login:
+            raise ValueError("The Login field must be set")
+        user = self.model(login=login, **extra_fields)
+        user.set_password(password)  # Hash the password
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, login, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        # Create a superuser
+        return self.create_user(login, password, **extra_fields)
+
+
+class Member(AbstractBaseUser, PermissionsMixin):
+    login = models.CharField(max_length=25, unique=True)
     firstname = models.CharField(max_length=25)
     lastname = models.CharField(max_length=25)
     age = models.PositiveIntegerField()
-    birth = models.DateField() 
+    
+    # Required fields for Django authentication
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)  # Can access the admin site
+    is_superuser = models.BooleanField(default=False)  # Superuser status
 
-    #wallet = models.ForeignKey(account, on_delete = models.CASCADE) 
+    USERNAME_FIELD = 'login'
+    REQUIRED_FIELDS = ['firstname', 'lastname', 'age']  # Required fields for createsuperuser
+
+    objects = MemberManager()  # Use the custom manager
 
     def __str__(self):
-        return f"{self.firstname} {self.lastname}"
+        return self.login  # Display the login as the string representation
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(Member, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.firstname} {self.user.lastname}"
+
+
+@receiver(post_save, sender=Member)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=Member)
+def save_user_profile(sender, instance, **kwargs):
+    instance.userprofile.save()
