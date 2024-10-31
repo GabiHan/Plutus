@@ -37,11 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'tailwind',
     'django_browser_reload',
-=======
->>>>>>> main
     'home', #add home app
     'members', #Add our newly created app 'members' here to load it. Do the same for any futur apps
 ]
@@ -51,11 +47,9 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # This must be present
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #tailwind
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'webPlutus.urls'
@@ -132,14 +126,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
  
-LOGIN_REDIRECT_URL = 'home'
+#LOGIN_REDIRECT_URL = ''
 LOGOUT_REDIRECT_URL = 'home'
 
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"  # Adjust based on your actual path
 
 
+AUTH_USER_MODEL = 'members.Member'  # Replace 'yourapp' with your actual app name
 
