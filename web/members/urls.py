@@ -18,9 +18,11 @@ urlpatterns = [
 ]
 """
 from django.urls import path
-from .views import register, login
+from .views import register, login_view, user_profile
 
 urlpatterns = [
     path('register/', register, name='register'),
-    path('login/', login, name='login'),
+    path('login/', login_view, name='login_view'),
+    path('index/', user_profile, name='user_profile')
+
 ]
