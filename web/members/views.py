@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
 from .models import UserProfile, Member  # Import the custom Member model
+from django.http import HttpResponse
 
 # Define registration here 
 def register(request):
@@ -23,18 +24,32 @@ def login_view(request):  # Renamed to avoid conflict
     if request.method == 'POST':
         login = request.POST.get('login')  # This should match your input field name
         password = request.POST.get('password')
-        user = authenticate(request, username=login, password=password)  # Use 'username'
-        
+        user = authenticate(request, login=login, password=password)  # Adjusted to your Member model
         if user is not None:
             auth_login(request, user)  # Use the renamed login function
             return redirect('user_profile')  # Redirect to user profile
         else:
+            print("Authentication failed")
             messages.error(request, 'Invalid credentials.')  # Use messages framework for error
             return render(request, 'members/login.html', {'error': 'Invalid credentials.'})
-    
-    return render(request, 'members/login.html')  # Render login template for GET request
+    else:
+        return render(request, 'members/login.html')  # Render login template for GET request
 
+
+#define user input in his profile    
 @login_required
 def user_profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
+
+    if request.method == 'POST':
+        user_bio = request.POST.get('bio')  
+        if user_bio: 
+            profile.bio = user_bio 
+            profile.save()  
+            messages.success(request, 'Bio updated successfully!')
+        else:
+            messages.error(request, 'Bio cannot be empty.')  
+
+    return render(request, 'members/index.html', {'profile': profile})
+
     return render(request, 'members/index.html', {'profile': profile})
