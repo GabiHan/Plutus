@@ -9,7 +9,7 @@ class MemberManager(BaseUserManager):
         if not login:
             raise ValueError("The Login field must be set")
         user = self.model(login=login, **extra_fields)
-        user.set_password(password)  # Hash the password
+        user.set_password(password)  
         user.save(using=self._db)
         return user
 
@@ -33,16 +33,17 @@ class Member(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)  # Superuser status
 
     USERNAME_FIELD = 'login'
-    REQUIRED_FIELDS = ['firstname', 'lastname', 'age']  # Required fields for createsuperuser
+    REQUIRED_FIELDS = ['firstname', 'lastname', 'age'] 
 
     objects = MemberManager()  # Use the custom manager
 
     def __str__(self):
-        return self.login  # Display the login as the string representation
+        return self.login  
 
 class UserProfile(models.Model):
     user = models.OneToOneField(Member, on_delete=models.CASCADE)
     bio = models.TextField(blank=True, null=True)
+    
 
     def __str__(self):
         return f"{self.user.firstname} {self.user.lastname}"
