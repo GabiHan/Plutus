@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
-from .models import UserProfile, Member  # Import the custom Member model
+from .models import UserProfile, Member, finance  # Import the custom Member model
 from django.http import HttpResponse
 
 # Define registration here 
@@ -42,7 +42,12 @@ def user_profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
-        user_bio = request.POST.get('bio')  
+        user_bio = request.POST.get('bio')
+        tab_money = request.POST.get('money')
+        tab_comment = request.POST.get('comment')
+        tab_date = request.POST.get('money_date')  
+
+        #User bio definition
         if user_bio: 
             profile.bio = user_bio 
             profile.save()  
@@ -50,6 +55,20 @@ def user_profile(request):
         else:
             messages.error(request, 'Bio cannot be empty.')  
 
-    return render(request, 'members/index.html', {'profile': profile})
 
-    return render(request, 'members/index.html', {'profile': profile})
+        # Save user's entries about his wallet
+        if tab_money and tab_comment and tab_date:
+            finance.objects.create(
+                profile=profile,
+                money=tab_money,
+                comment=tab_comment,
+                date=tab_date
+            )
+            messages.success(request, 'Financial entry successfully added!')
+        else:
+            messages.error(request, "All financial fields must be filled.")
+
+
+    financial_entries = profile.financial_entries.all()
+
+    return render(request, 'members/index.html', {'profile': profile, 'financial_entries': financial_entries})
