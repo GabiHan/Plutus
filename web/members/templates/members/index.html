@@ -12,8 +12,39 @@
     <p>Tell us more about you !</p>
     <input type="text" name="bio" placeholder="Type your bio here" value="{{ profile.bio }}"><br>  
     <input type="submit" value="Submit">
-</form>
 
 <p>Profile bio: {{ profile.bio }}</p>  <!-- Display the bio -->
 
+ <!-- Money input table -->
+<p>Fill up the form to register your money</p> 
+<table>
+    <tr>
+      <th>Amount of money</th>
+      <th>Comment</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td><input type="text" name="money" placeholder="Amount" value="{{ profile.money }}"><br> </td>
+      <td><input type="text" name="comment" placeholder="Your comment" value="{{ profile.comment }}"><br> </td>
+      <td><input type="date" name="money_date" value="{{ profile.date|date:'Y-m-d' }}"></td>
+      <th><input type="submit" value="Submit"> </th>
+    </tr>
+  </table>
+</form>
+
+<p>This is your wallet updated:</p> 
+  {% for entry in financial_entries %}
+    <table>
+    <tr>
+        <td>{{ entry.money }}</td>
+        <td>{{ entry.comment }}</td>
+        <td>{{ entry.date }}</td>
+    </tr>
+    </table>
+  
+    {% empty %}
+     <!-- This line is for when there is nothing to show  -->
+        <li>No financial entries available.</li>
+    {% endfor %}
 {% endblock %}
+
