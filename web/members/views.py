@@ -43,6 +43,7 @@ def user_profile(request):
 
     if request.method == 'POST':
         user_bio = request.POST.get('bio')
+        user_image = request.POST.get('profile_image')
         tab_money = request.POST.get('money')
         tab_comment = request.POST.get('comment')
         tab_date = request.POST.get('money_date')  
@@ -55,6 +56,13 @@ def user_profile(request):
         else:
             messages.error(request, 'Bio cannot be empty.')  
 
+        #User profile picture definition
+        if user_image:
+            profile.profile_image = user_image
+            profile.save()
+            messages.success(request, 'Profile picture successfully updated!')
+        else:
+            messages.error(request, 'Failed to update profile picture.')
 
         # Save user's entries about his wallet
         if tab_money and tab_comment and tab_date:
