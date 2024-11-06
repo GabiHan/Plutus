@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegistrationForm
 from .models import UserProfile, Member, finance  # Import the custom Member model
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
+
 
 # Define registration here 
 def register(request):
@@ -38,6 +40,7 @@ def login_view(request):  # Renamed to avoid conflict
 
 #define user input in his profile    
 @login_required
+@csrf_protect
 def user_profile(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
@@ -57,9 +60,8 @@ def user_profile(request):
             messages.error(request, 'Bio cannot be empty.')  
 
         #User profile picture definition
-        if user_image:
-            profile.profile_image = user_image
-            profile.save()
+        if user_image in request.FILES:
+            profile.profile_image = request.FILES.get['user_image']
             messages.success(request, 'Profile picture successfully updated!')
         else:
             messages.error(request, 'Failed to update profile picture.')
