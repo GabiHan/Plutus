@@ -10,7 +10,12 @@
 <form method="post" action="{% url 'user_profile' %}">
     {% csrf_token %}
     <p>Update your profile picture.</p>
-    <img src="{{profile.profile_image.url}}" class='img-fluid profile_image'>
+    <img src="{{ profile.profile_image.url }}" class='img-fluid profile_image' alt="Profile Picture">
+
+    <p>Choose a new profile picture:</p>
+    <input type="file" name="profile_image" accept="image/*"><br>
+    <input type="submit" value="Upload">
+
     <p>Tell us more about you !</p>
     <input type="text" name="bio" placeholder="Type your bio here" value="{{ profile.bio }}"><br>  
     <input type="submit" value="Submit">
@@ -36,6 +41,7 @@
 
 <p>This is your wallet updated:</p> 
   {% for entry in financial_entries %}
+  {% csrf_token %}
     <table>
     <tr>
         <td>{{ entry.money }}</td>
