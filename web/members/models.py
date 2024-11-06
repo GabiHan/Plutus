@@ -44,6 +44,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
 class UserProfile(models.Model):
     user = models.OneToOneField(Member, on_delete=models.CASCADE)
     bio = models.TextField(blank=True, null=True)
+    profile_image = models.ImageField(default='default.jpg', upload_to='profile_images', null=True)
 
 #define a new table, a foreign key of UserProfile that take care of the user input for his wallet 
 class finance(models.Model):
