@@ -55,7 +55,7 @@ class finance(models.Model):
 
     def __str__(self):
         return f"{self.user.firstname} {self.user.lastname}"
-        return f"{self.comment} - {self.money} on {self.date}"
+        return f"{self.comment} {self.money} {self.date}"
 
 
 @receiver(post_save, sender=Member)
