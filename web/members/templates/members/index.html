@@ -9,6 +9,8 @@
 
 <form method="post" action="{% url 'user_profile' %}">
     {% csrf_token %}
+    <p>Update your profile picture.</p>
+    <img src="{{profile.profile_image.url}}" class='img-fluid profile_image'>
     <p>Tell us more about you !</p>
     <input type="text" name="bio" placeholder="Type your bio here" value="{{ profile.bio }}"><br>  
     <input type="submit" value="Submit">
