@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegistrationForm
 from .models import UserProfile, Member, finance  # Import the custom Member model
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+
+from django.views import View
+
+from .forms import UserRegistrationForm
 
 
 # Define registration here 
@@ -46,7 +49,7 @@ def user_profile(request):
 
     if request.method == 'POST':
         user_bio = request.POST.get('bio')
-        user_image = request.POST.get('profile_image')
+        #user_image = request.POST.get('profile_image')
         tab_money = request.POST.get('money')
         tab_comment = request.POST.get('comment')
         tab_date = request.POST.get('money_date')  
@@ -60,8 +63,11 @@ def user_profile(request):
             messages.error(request, 'Bio cannot be empty.')  
 
         #User profile picture definition
-        if user_image in request.FILES:
-            profile.profile_image = request.FILES.get['user_image']
+        if request.method == 'POST' and request.FILES.get('profile_image'):
+            profile_image = request.FILES['profile_image']
+        # Save the uploaded image
+            profile.profile_image = profile_image
+            profile.save()
             messages.success(request, 'Profile picture successfully updated!')
         else:
             messages.error(request, 'Failed to update profile picture.')
