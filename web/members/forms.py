@@ -3,10 +3,12 @@ from .models import Member, MemberManager, UserProfile
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
+    
 
     class Meta:
         model = Member
-        fields = ['login', 'firstname', 'lastname', 'age', 'password']  # Add all necessary fields
+        fields = ['login', 'firstname','age', 'lastname', 'password']  # Add all necessary fields
+
 
     def save(self, commit=True):
         user = super().save(commit=False)
