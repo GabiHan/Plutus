@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import UserProfile, Member, finance  # Import the custom Member model
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import update_session_auth_hash
 
 from django.views import View
 
@@ -40,8 +41,14 @@ def login_view(request):  # Renamed to avoid conflict
     else:
         return render(request, 'members/login.html')  # Render login template for GET request
 
-
-#define user input in his profile    
+def change_pass(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data= request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth(request, form.user)
+        else :
+            return render(request, 'members/login.html') 
 @login_required
 @csrf_protect
 def user_profile(request):
