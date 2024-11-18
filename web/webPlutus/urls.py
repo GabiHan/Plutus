@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('members/', include('members.urls')),  # Placeholder for members app
     path("django_browser_reload/", include("django_browser_reload.urls")),
+    
 ]
 
 if settings.DEBUG:

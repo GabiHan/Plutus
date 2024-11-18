@@ -1,8 +1,12 @@
-{% extends 'home/base.html' %}
-
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<nav>
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'change_pass' %}">Change password</a>
+
+    
+</nav>
 <h1>Login</h1>
 {% if error %}
 <p>{{ error }}</p>

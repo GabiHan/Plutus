@@ -139,5 +139,6 @@ INTERNAL_IPS = [
 
 
 
-AUTH_USER_MODEL = 'members.Member'  # Replace 'yourapp' with your actual app name
+AUTH_USER_MODEL = 'members.Member'  
+
 
