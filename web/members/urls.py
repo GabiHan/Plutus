@@ -18,12 +18,15 @@ urlpatterns = [
 ]
 """
 from django.urls import path
-from .views import register, login_view, user_profile
+from .views import register, login_view, user_profile, change_pass
+from django.contrib.auth.views import PasswordChangeView
 
 urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_view, name='login_view'),
-    path('index/', user_profile, name='user_profile')
+    path('index/', user_profile, name='user_profile'),
+    path('passchange/', change_pass, name='change_pass'),
+
 
 
 
