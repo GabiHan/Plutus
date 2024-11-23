@@ -1,11 +1,7 @@
 {
   "name": "Plutus",
   "version": "1.0.0",
-"scripts": {
-   "build" : "python manage.py runserver"
-},
-  "devDependencies": {
-    "postcss": "^8.x.x",
-    "autoprefixer": "^10.x.x"
+  "scripts": {
+    "build": "python manage.py runserver"
   }
 }
