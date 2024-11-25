@@ -9,11 +9,14 @@
 </head>
 <body>
     <nav>
-        <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'register' %}">Register</a></li>
-        <li><a href="{% url 'login_view' %}">Sign in</a></li>
-        </ul>
+        <img src="static/src/image/logo.png" alt="" width="120" height="120">
+
+
+
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login_view' %}">Sign in</a>
+
         
     </nav>
     {% block content %}{% endblock %}
