@@ -8,13 +8,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}  <!-- Load the static template tag -->
-    <link href="{% static './static/src/main.css' %}" rel="stylesheet">
+    {% load static %} 
+    <link href="{% static 'src/main.css' %}" rel="stylesheet">
     <title>Register</title>
 </head>
+<style>
+form {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #5D5D5D;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+}
 
+form p {
+    margin-bottom: 15px;
+}
+
+form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+form button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+</style>
 <body>
-<h1>Register</h1>
+<br>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
