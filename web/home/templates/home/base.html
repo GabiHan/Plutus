@@ -13,8 +13,9 @@
         
         .navbar {
           width: 100%;
-          background-color: #555;
+          background-color: #5D5D5D;
           overflow: auto;
+          border-radius: 20px;
         }
         
         .navbar a {
@@ -39,15 +40,14 @@
             display: block;
           }
         }
+
 </style>
 
 <div class="navbar">
     <a href="{% url 'home' %}"><span style="font-size:30px;">&#9751; </span>Home</a> 
-    <a href="{% url 'register' %}"><span style="font-size:30px;">&#127968; </span>Register</a> 
-    <a href="{% url 'login_view' %}"><span style="font-size:30px;">&#127968; </span></i>Sign in</a> 
+    <a href="{% url 'register' %}"><span style="font-size:30px;">	&#128101; </span>Register</a> 
+    <a href="{% url 'login_view' %}"><span style="font-size:30px;">&#x2714; </span></i>Sign in</a> 
   </div>
-
-<br>
 
     {% block content %}{% endblock %}
 </body>
