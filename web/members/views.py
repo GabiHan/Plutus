@@ -49,6 +49,7 @@ def change_pass(request):
             update_session_auth(request, form.user)
         else :
             return render(request, 'members/login.html') 
+        
 @login_required
 @csrf_protect
 def user_profile(request):

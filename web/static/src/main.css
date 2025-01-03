@@ -1,3 +1,10 @@
 body{
     background-color: brown;
 }
+
+.header{
+    background-color: white;
+    margin-top: 100px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+}
