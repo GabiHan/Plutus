@@ -3,43 +3,40 @@ Plutus (/ˈpluːtəs/; Greek: Πλοῦτος, translit. Ploûtos, lit. "wealth"
 
 
 #Who are we? 
-"Ariamm",[Ariam], defined as "Ariary Money Manager"
+"Ariamm",[Ariam], defined as "Ariary Money Manager". But for now Mostly known as "Minotary".
 
 #About
 A website to manage your piggy bank informations. 
 
 #Challenge 
-Make a website with Python and Python based frameworks 
+Make a website with Python and Python based frameworks aka Django.
 
 #Git 
 Use git conventionnal commits 
 
 #Color code
 For our website our color base will be :
-#84B7E3
-#84E3E0
-#8487E3
+grey/gold/black
 
 #database 
-_ For now, we'll use MySQL to create and manage our database
-_ Next step is to consider using MONGODB 
-
+Django already have a database integrated in it. All we have to do is just exploit it.
 #compilation 
 _ Python 
 
 #Activation process 
-python -m pip install mysql-connector-python
+When you pull the repository, 
+load the command: "pip install -r requirements.txt" to automatically install what's needed mentionned in the requirement.txt.
 
 #Django configuration
-py -3 -m venv .venv
-.venv\scripts\activate
-python -m pip install django
+Run : "python -m venv .venv" to create your virtual environement
 
 #run server
-python manage.py runserver
+Nodejs is also needed to run out build. If you still don't have nodeJS installed, install it.
+command: npm run build
 
-#migrate 
+
+#migrate database 
 py manage.py migrate
 
 #make migrations 
-py manage.py makemigrations filename
+py manage.py makemigrations 
