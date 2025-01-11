@@ -1,5 +1,11 @@
 {% block content %}
-<h1>Welcome to {{ profile.user.firstname }}'s Profile</h1>
+<style>
+  .meow{
+    background-color: brown;
+  }
+</style>
+<div class="meow"><h1>Welcome to {{ profile.user.firstname }}'s Profile</h1></div>
+
 
 {% if messages %}
     {% for message in messages %}
