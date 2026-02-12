@@ -8,41 +8,6 @@
     <title>{% block title %}My Site{% endblock %}</title>
 </head>
 <body>
-    <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
-        
-        .navbar {
-          width: 100%;
-          background-color: #5D5D5D;
-          overflow: auto;
-          border-radius: 20px;
-        }
-        
-        .navbar a {
-          float: left;
-          padding: 12px;
-          color: white;
-          text-decoration: none;
-          font-size: 17px;
-        }
-        
-        .navbar a:hover {
-          background-color: #000;
-        }
-        
-        .active {
-          background-color: #04AA6D;
-        }
-        
-        @media screen and (max-width: 500px) {
-          .navbar a {
-            float: none;
-            display: block;
-          }
-        }
-
-</style>
-
 <div class="navbar">
     <a href="{% url 'home' %}"><span style="font-size:30px;">&#9751; </span>Home</a> 
     <a href="{% url 'register' %}"><span style="font-size:30px;">	&#128101; </span>Register</a> 

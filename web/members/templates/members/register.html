@@ -1,7 +1,3 @@
-{% extends 'home/base.html' %}
-
-{% block title %}Register{% endblock %}
-
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -13,65 +9,142 @@
     <title>Register</title>
 </head>
 <style>
-form {
-    max-width: 600px;
-    padding: 20px;
-    background-color: #5D5D5D;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* =========================
+   FULL PAGE CONTAINER
+========================= */
+.register-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* split in two */
+    min-height: 98vh;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* =========================
+   LEFT IMAGE
+========================= */
+.register-container .left {
+    position: relative;
+    background: url("{% static 'src/1.jpg' %}") center/cover no-repeat;
+    overflow: hidden;
+}
+
+.register-container .left::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3); /* subtle overlay */
+}
+
+.register-container .left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s ease;
+}
+
+.register-container .left:hover img {
+    transform: scale(1.05); /* gentle zoom on hover */
+}
+
+/* =========================
+   RIGHT FORM
+========================= */
+.register-container .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #acaaaa;
     color: white;
+    padding: 3rem;
 }
 
-form p {
-    margin-bottom: 15px;
+.register-container form {
+    border: 2px solid #000000;
+    width: 100%;
+    max-width: 400px;
+    background-color: rgba(253, 255, 160, 0.2);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    
 }
 
-form label {
+.register-container form label {
+    color: #2e2e2e;
     font-weight: bold;
     display: block;
-    margin-bottom: 5px;
-}
-
-
-form input[type="text"],
-form input[type="email"],
-form input[type="password"],
-form input[type="number"] {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin-bottom: 0.5rem;
     font-size: 14px;
 }
 
-form button[type="submit"] {
-    width: 100%;
+.register-container form input[type="text"],
+.register-container form input[type="email"],
+.register-container form input[type="password"],
+.register-container form input[type="number"] {
+    width: 95%;
     padding: 12px;
-    background-color: #4CAF50;
-    color: white;
+    margin-bottom: 15px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #fff;
+    font-size: 14px;
+}
+
+.register-container form input::placeholder {
+    color: #aaa; /* gray placeholder text */
+    opacity: 1;  /* ensures visibility in all browsers */
+}
+
+.register-container form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #000000;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    color: white;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-
-form button[type="submit"]:hover {
-    background-color: #45a049;
+.register-container form button[type="submit"]:hover {
+    background-color: #ffffff;
+    color: #000000;
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+    .register-container {
+        grid-template-columns: 1fr;
+    }
 
+    .register-container .left,
+    .register-container .right {
+        width: 100%;
+        min-height: 40vh;
+    }
+
+    .register-container .right {
+        padding: 2rem 1rem;
+    }
+}
 </style>
 <body>
-<br>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
-
-
-
+<div class="register-container">
+    <div class="left">
+        <img src="{% static 'src/1.jpg' %}" alt="Register Image">
+    </div>
+    <div class="right">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
 

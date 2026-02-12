@@ -1,4 +1,139 @@
-body{
-    background-color: rgb(107, 16, 16);
-    margin-left: 10px;
-}
+      body {
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        background: linear-gradient(120deg, #0e0f11, #fff6e5);
+      }
+
+      /* Glass navbar container */
+      .navbar {
+        width: 98%;
+        padding: 10px 16px;
+
+        display: flex;
+        justify-content: flex-end; /* 👈 LEFT alignment */
+        align-items: center;
+        gap: 12px;
+
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border-radius: 5px;
+        box-shadow:
+          0 8px 30px rgba(0, 0, 0, 0.12),
+          inset 0 0 20px rgba(255, 255, 255, 0.4);
+
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle floating light (butterfly glow illusion) */
+      .navbar a::before,
+      .navbar a::after {
+        content: "";
+        position: absolute;
+        inset: -30%;
+        background:
+          radial-gradient(circle at 30% 50%, rgba(182, 182, 182, 0.75), transparent 60%),
+          radial-gradient(circle at 70% 50%, rgba(180, 220, 255, 0.75), transparent 60%);
+        filter: blur(18px);
+        opacity: 0;
+        transform: scale(0.6);
+        transition:
+          opacity 0.35s ease,
+          transform 0.45s cubic-bezier(.34,1.56,.64,1);
+        z-index: -1;
+      }
+
+      /* Navbar links */
+      .navbar a {
+        border: 2px;
+        position: relative;
+        padding: 12px 22px;
+        border-radius: 12px;
+
+        color: #000;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: 500;
+        white-space: nowrap;
+
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.35),
+          rgba(255, 255, 255, 0.1)
+        );
+
+        backdrop-filter: blur(6px);
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.15),
+          inset 0 0 8px rgba(255, 255, 255, 0.4);
+
+        overflow: hidden; /* 🔑 required for gooey */
+        isolation: isolate;
+
+        transition:
+          transform 0.35s cubic-bezier(.34,1.56,.64,1),
+          box-shadow 0.35s ease,
+          background 0.35s ease;
+      }
+
+      /* Hover effect */
+      .navbar a:hover {
+      transform: translateY(-6px) scale(1.07);
+      box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.25),
+        0 0 22px rgba(49, 47, 49, 0.6);
+    }
+
+    .navbar a:hover::before,
+    .navbar a:hover::after {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+      /* Sparkle trail */
+      .navbar a::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          120deg,
+          transparent 30%,
+          rgba(44, 43, 43, 0.6),
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+
+      .navbar a:hover::after {
+        opacity: 1;
+      }
+
+      /* Active link */
+      .active {
+        background: linear-gradient(
+          135deg,
+          rgba(160, 255, 220, 0.55),
+          rgba(120, 220, 200, 0.35)
+        );
+      }
+
+      /* ✅ Responsive (mobile-first logic) */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 500px) {
+        .navbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .navbar a {
+          text-align: center;
+          width: 100%;
+        }
+      }
