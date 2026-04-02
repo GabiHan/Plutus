@@ -16,7 +16,13 @@ Use git conventionnal commits
 
 #Color code
 For our website our color base will be :
-grey/gold/black
+--alice-blue: #edf2fbff;
+--lavender: #e2eafcff;
+--lavender-2: #d7e3fcff;
+--periwinkle: #ccdbfdff;
+--periwinkle-2: #c1d3feff;
+--periwinkle-3: #b6ccfeff;
+--baby-blue-ice: #abc4ffff;
 
 #database 
 Django already have a database integrated in it. All we have to do is just exploit it.
