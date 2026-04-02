@@ -8,13 +8,12 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Member
-        fields = ['login', 'firstname', 'age', 'lastname', 'password']
+        fields = ['login', 'firstname', 'lastname', 'password']
 
         widgets = {
             'login': forms.TextInput(attrs={'placeholder': 'Enter your username'}),
             'firstname': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'lastname': forms.TextInput(attrs={'placeholder': 'Last Name'}),
-            'age': forms.NumberInput(attrs={'placeholder': 'Your Age'}),
         }
 
     def save(self, commit=True):

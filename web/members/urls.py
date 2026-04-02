@@ -18,7 +18,7 @@ urlpatterns = [
 ]
 """
 from django.urls import path
-from .views import register, login_view, user_profile, change_pass
+from .views import register, login_view, user_profile, change_pass, logout_view
 from django.contrib.auth.views import PasswordChangeView
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', login_view, name='login_view'),
     path('index/', user_profile, name='user_profile'),
     path('passchange/', change_pass, name='change_pass'),
+    path('logout/', logout_view, name='logout'),
 
 
 

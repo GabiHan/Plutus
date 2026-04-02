@@ -25,7 +25,6 @@ class Member(AbstractBaseUser, PermissionsMixin):
     login = models.CharField(max_length=25, unique=True)
     firstname = models.CharField(max_length=25)
     lastname = models.CharField(max_length=25)
-    age = models.PositiveIntegerField()
     
     # Required fields for Django authentication
     is_active = models.BooleanField(default=True)

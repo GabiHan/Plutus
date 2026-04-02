@@ -1,64 +1,148 @@
 {% block content %}
-<style>
-  .meow{
-    background-color: brown;
-  }
-</style>
-<div class="meow"><h1>Welcome to {{ profile.user.firstname }}'s Profile</h1></div>
+{% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'src/main.css' %}" rel="stylesheet">
+    <title>Profile</title>
+</head>
 
-{% if messages %}
-    {% for message in messages %}
-        <p>{{ message }}</p>
-    {% endfor %}
-{% endif %}
+<body>
 
-<form method="post" action="{% url 'user_profile' %}">
-    {% csrf_token %}
-    <p>Update your profile picture.</p>
-    <img src="{{ profile.profile_image.url }}" class='img-fluid profile_image' alt="Profile Picture">
+<div class="layout">
+    <aside class="sidebar">
+        <img src="{{ profile.profile_image.url }}" class="profile-img" alt="Profile Picture">
+        <div class="info-card">
+            <p class="label">Name</p>
+            <h2 class="value">{{ profile.user.firstname }}</h2>
+        </div>
 
-    <p>Choose a new profile picture:</p>
-    <input type="file" name="profile_image" accept="image/*"><br>
-    <input type="submit" value="Upload">
+        <div class="info-card">
+            <p class="label">Bio</p>
+            <p class="value">{{ profile.bio }}</p>
+        </div>
 
-    <p>Tell us more about you !</p>
-    <input type="text" name="bio" placeholder="Type your bio here" value="{{ profile.bio }}"><br>  
-    <input type="submit" value="Submit">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button class="logout-btn">Logout</button>
+        </form>
 
-<p>Profile bio: {{ profile.bio }}</p>  <!-- Display the bio -->
+    </aside>
 
- <!-- Money input table -->
-<p>Fill up the form to register your money</p> 
-<table>
-    <tr>
-      <th>Amount of money</th>
-      <th>Comment</th>
-      <th>Date</th>
-    </tr>
-    <tr>
-      <td><input type="text" name="money" placeholder="Amount" value="{{ profile.money }}"><br> </td>
-      <td><input type="text" name="comment" placeholder="Your comment" value="{{ profile.comment }}"><br> </td>
-      <td><input type="date" name="money_date" value="{{ profile.date|date:'Y-m-d' }}"></td>
-      <th><input type="submit" value="Submit"> </th>
-    </tr>
-  </table>
-</form>
+    <main class="main">
 
-<p>This is your wallet updated:</p> 
-  {% for entry in financial_entries %}
-  {% csrf_token %}
-    <table>
-    <tr>
-        <td>{{ entry.money }}</td>
-        <td>{{ entry.comment }}</td>
-        <td>{{ entry.date }}</td>
-    </tr>
-    </table>
-  
-    {% empty %}
-     <!-- This line is for when there is nothing to show  -->
-        <li>No financial entries available.</li>
-    {% endfor %}
+        <div class="welcome">
+            <h1>Welcome, {{ profile.user.firstname }} 👋</h1>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <section class="money-form">
+
+            <h3>Register money</h3>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="add_money">
+
+                <table>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Comment</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+
+                    <tr>
+                        <td><input type="text" name="money"></td>
+                        <td><input type="text" name="comment"></td>
+                        <td><input type="date" name="money_date"></td>
+                        <td><center><button class="add" type="submit">Add</button></center></td>
+                    </tr>
+                </table>
+            </form>
+
+        </section>
+
+        <section class="wallet">
+
+            <h3>Your wallet</h3>
+
+            {% for entry in financial_entries %}
+                <div class="entry">
+                    <span>{{ entry.money }}</span>
+                    <span>{{ entry.comment }}</span>
+                    <span>{{ entry.date }}</span>
+                </div>
+            {% empty %}
+                <p>No financial entries available.</p>
+            {% endfor %}
+
+        </section>
+
+    </main>
+
+</div>
+
+<button class="fab bio-fab" onclick="openModal('bioModal')">✏️</button>
+<button class="fab img-fab" onclick="openModal('imgModal')">📷</button>
+
+<div id="bioModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('bioModal')">&times;</span>
+        <h3>Edit Bio</h3>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update_bio">
+
+            <textarea name="bio" placeholder="Write your bio...">{{ profile.bio }}</textarea>
+            <center><button class="add" type="submit">Save</button></center>
+        </form>
+    </div>
+</div>
+
+<div id="imgModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('imgModal')">&times;</span>
+        <h3>Update Profile Picture</h3>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="upload_image">
+
+            <input type="file" name="profile_image" accept="image/*">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+<script>
+function openModal(id) {
+    document.getElementById(id).style.display = "block";
+}
+
+function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+}
+
+// close when clicking outside
+window.onclick = function(event) {
+    document.querySelectorAll(".modal").forEach(modal => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>
+
 {% endblock %}
-

@@ -8,12 +8,13 @@
     <title>{% block title %}My Site{% endblock %}</title>
 </head>
 <body>
+  <br>
 <div class="navbar">
-    <a href="{% url 'home' %}"><span style="font-size:30px;">&#9751; </span>Home</a> 
-    <a href="{% url 'register' %}"><span style="font-size:30px;">	&#128101; </span>Register</a> 
-    <a href="{% url 'login_view' %}"><span style="font-size:30px;">&#x2714; </span></i>Sign in</a> 
+    <div class="logo">Plutus</div>
+    <a href="{% url 'home' %}">Home</a> 
+    <a href="{% url 'register' %}">Register</a> 
+    <a href="{% url 'login_view' %}">Sign in</a> 
   </div>
-
     {% block content %}{% endblock %}
 </body>
 </html>
