@@ -1,10 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+:root {
+  --title__color: #1b2a49;
+  --bg__color: white;
+  --text__color: black;
+}
+
 body {
-  color : #9381ff;
-  background: white;
+  color: #7371fc;
+  background-color: white;
   font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
+  height: 100%;
+  margin: 0;
   }
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
 
 .logo {
   font-size: 25px;
@@ -29,7 +45,7 @@ body {
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
-  color: #1b2a49;
+  color: var(--title__color);
   overflow: hidden;
   z-index: 1;
   }
@@ -82,9 +98,17 @@ body {
   );
   }
 .header {
-  padding: 60px;
+  padding: 13%;
   text-align: center;
-  background: linear-gradient(120deg, #edf2fb, #e2eafc, #d7e3fc, #ccdbfd, #b6ccfe, #abc4ff);
+  background: linear-gradient(
+    120deg,
+    rgb(237 242 251 / 80%),
+    rgb(226 234 252 / 80%),
+    rgb(215 227 252 / 80%),
+    rgb(204 219 253 / 80%),
+    rgb(182 204 254 / 80%),
+    rgb(171 196 255 / 80%)
+  );
   color: white;
   border-radius: 10px;
   animation: bounce 3s ease-in-out infinite;
@@ -122,7 +146,7 @@ body {
 .login-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  min-height: 90vh;
+  min-height: 92vh;
   font-family: "Josefin Sans", sans-serif;
   }
 
@@ -130,7 +154,14 @@ body {
   position: relative;
   background: url("./1.jpg") center/cover no-repeat;
   overflow: hidden;
-  }
+}
+
+.login-container .left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5); /* adjust opacity here */
+}
 
 .login-container .left::after {
   content: "";
@@ -142,7 +173,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.5s ease;
+  transition: transform 0.5s ease;
   }
 
 .login-container .left:hover img {
@@ -218,20 +249,28 @@ body {
 .login-container form input[type="submit"] {
   width: 100%;
   padding: 14px;
-  background-color: #b8c0ff;
+  background: linear-gradient(135deg, #d7e3fc, #c1d3fe, #b6ccfe);
   border: none;
-  border-radius: 8px;
-  color: rgb(0, 0, 0);
+  border-radius: 50px; 
+  color: #000;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
-  }
+  transition: all 0.3s ease;
+  font-family: "Josefin Sans", sans-serif;
+  box-shadow: 0 8px 20px #abc4ff;
+  position: relative;
+  overflow: hidden;
+}
 
 .login-container form input[type="submit"]:hover {
-  background-color: #ffffff;
-  color: #000000;
-  }
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
 
+.login-container form input[type="submit"]:active {
+  transform: scale(0.97);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
 .login-container p {
   color: #000000;
   margin-bottom: 1rem;
@@ -424,168 +463,16 @@ body {
 *::after {
   box-sizing: border-box;
 }
-body,
-footer,
-div,
-h1,
-h2,
-h3,
-ul,
-li,
-a,
-input,
-span,
-i {
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  list-style: none;
-}
-:root {
-  
-  --bg__wrapper: #F1F2FC;
-  
-  --clr__dark--100: #abc4ff;
-  --clr__dark--200: #abc4ff;
-  --clr__primary--100: #F2F3FB;
-  --clr__primary--200: #AD658E;
-  --clr__primary--300: #E49852;
-  
-  --clr__neutral--100: #F2F3FB;
-  --clr__neutral--200: #9DA2AE;
-  --clr__neutral--300: #000000;
-}
-body {
-  font-family: "Josefin Sans", sans-serif;
-  font-weight: 500;
-  color: var(--clr__neutral--300);
-}
-a {
-  cursor: pointer;
-  color: inherit;
-}
-a:hover {
-  transition: 0.5s ease-in-out;
-  text-decoration: underline
-}
-.wrapper {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-}
 .footer {
-  box-shadow: 0px 25px 35px -15px rgba(15, 30, 82, 0.32);
-  border-radius: 15px;
-  background: var(--clr__dark--200);
-  padding: 70px 0px 70px 110px; 
-  width: 1200px;
-  
+  background: #e2eafc;
+  color: rgb(0, 0, 0);
+  padding: 45px 0px 50px 80px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(100px, 1fr)) 450px;
-
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  text-align: center;
 }
 
-.footer__header {
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.17em;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-}
-.footer__options {
-  font-size: 14px;
-  opacity: 0.7;
-}
-.footer__item + .footer__item {
-  margin-top: 12px;
-}
-.footer__label,
-.footer__follow {
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 10px;
-}
-.footer__form {
-  display: flex;
-}
-.footer__input {
-  background: var(--clr__dark--200);
-  color: var(--clr--neutral--300);
-  border: 2px solid #3A456A;
-  border-radius: 5px;
-  margin-right: 10px;
-  width: 250px;
-  height: 50px;
-  text-indent: 1.2rem;
-}
-.footer__input::placeholder {
-  padding: 10px;
-}
-.btn {
-  background: var(--clr__neutral--100);
-  padding: 15px 20px;
-  text-transform: uppercase;
-  color: var(--clr__dark--100);
-  font-size: 16px;
-  font-weight: 700;
-}
-.btn:hover {
-  transition: 0.5s ease-in;
-  background: var(--clr__neutral--200);
-  color: var(--clr__neutral--100);
-  text-decoration: none;
-}
-.footer__icons {
-  padding-top: 5px;
-}
-.footer__icon {
-  width: 46px;
-  height: 46px;
-  padding: 8px 10px;
-}
-.footer__icon + .footer__icon {
-  margin-left: 10px;
-}
-.footer__icon--facebook {
-  background: #4C6EA7;
-}
-.footer__icon--twitter {
-  background: #4297C4;
-}
-.footer__icon--instagram {
-  background: linear-gradient(46.93deg, #FFB73D 0%, #C47067 45.55%, #9D23E4 96.85%);
-
-}
-
-@media only screen and (max-width: 1200px) {
-  .footer {
-    width: 890px;
-   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-  .footer__contact {
-    margin-top: 32px;
-  }
-}
-@media only screen and (max-width: 900px) {
-.footer {
-   width: 690px;
-   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-  .footer__contact {
-    margin-top: 32px;
-  }
-  .footer__form {
-    flex-direction: column;
-  }
-  .footer__input {
-   margin-bottom: 10px;
-   margin-right: 0px;
-  }
-  .btn {
-    width: fit-content;
-  }
-}
 @media only screen and (max-width: 700px) {
 .footer {
    width: 590px;

@@ -81,6 +81,9 @@ def user_profile(request):
             if "profile_image" in request.FILES:
                 profile.profile_image = request.FILES["profile_image"]
                 profile.save()
+                messages.success(request, "Image uploaded!")
+            else:
+                messages.error(request, "No file detected.")
 
         # ---------------- FINANCE ----------------
         tab_money = request.POST.get('money')

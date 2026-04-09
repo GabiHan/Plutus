@@ -94,52 +94,57 @@
 <button class="fab bio-fab" onclick="openModal('bioModal')">✏️</button>
 <button class="fab img-fab" onclick="openModal('imgModal')">📷</button>
 
+<!-- BIO MODAL -->
 <div id="bioModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('bioModal')">&times;</span>
-        <h3>Edit Bio</h3>
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('bioModal')">&times;</span>
+    <h3>Edit Bio</h3>
 
-        <form method="post">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="update_bio">
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="update_bio">
 
-            <textarea name="bio" placeholder="Write your bio...">{{ profile.bio }}</textarea>
-            <center><button class="add" type="submit">Save</button></center>
-        </form>
-    </div>
+      <textarea name="bio" placeholder="Write your bio...">{{ profile.bio }}</textarea>
+      <center><button class="add" type="submit">Save</button></center>
+    </form>
+  </div>
 </div>
 
+<!-- IMAGE MODAL -->
 <div id="imgModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('imgModal')">&times;</span>
-        <h3>Update Profile Picture</h3>
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('imgModal')">&times;</span>
+    <h3>Update Profile Picture</h3>
 
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="upload_image">
+    <form method="post" action="{% url 'user_profile' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="upload_image">
 
-            <input type="file" name="profile_image" accept="image/*">
-            <button type="submit">Upload</button>
-        </form>
-    </div>
+      <input type="file" name="profile_image" accept="image/*" required>
+      <button type="submit" class="add">Upload</button>
+    </form>
+  </div>
 </div>
 <script>
 function openModal(id) {
-    document.getElementById(id).style.display = "block";
+  document.getElementById(id).style.display = "block";
 }
 
 function closeModal(id) {
-    document.getElementById(id).style.display = "none";
+  document.getElementById(id).style.display = "none";
 }
 
-// close when clicking outside
-window.onclick = function(event) {
-    document.querySelectorAll(".modal").forEach(modal => {
-        if (event.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-}
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+});
+
+document.querySelectorAll(".modal-content").forEach(content => {
+  content.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+});
 </script>
 
 </body>
