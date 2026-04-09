@@ -32,7 +32,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)  # Superuser status
 
     USERNAME_FIELD = 'login'
-    REQUIRED_FIELDS = ['firstname', 'lastname', 'age'] 
+    REQUIRED_FIELDS = ['firstname', 'lastname'] 
 
     objects = MemberManager()  # Use the custom manager
 

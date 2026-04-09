@@ -99,6 +99,7 @@ main {
   }
 .header {
   padding: 13%;
+  width: 90%;
   text-align: center;
   background: linear-gradient(
     120deg,
@@ -112,6 +113,8 @@ main {
   color: white;
   border-radius: 10px;
   animation: bounce 3s ease-in-out infinite;
+  width: 95%; /* Or any width smaller than parent */
+  margin: 0 auto;
   }
 
 .header h1 {
@@ -420,8 +423,9 @@ main {
   }
 
 .add {
-  background-color: #E6E6FA;
-  color: #333;
+  font-family: "Josefin Sans", sans-serif;
+  background-color: #9ba9ff;
+  color: white;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
   border: none;
@@ -431,9 +435,10 @@ main {
   }
 
 .add:hover {
-  background-color: #dcdcff;       
+  background-color: #eccaff;       
   transform: translateY(-3px);    
-  box-shadow: 0 15px 30px rgba(0,0,0,0.35);
+  box-shadow: 0 15px 30px #b9b5ff;
+  color: #000;
   }
 
 .modal textarea {
@@ -446,7 +451,8 @@ main {
   width: 100%;
   margin-top: 20px;
   padding: 10px;
-  background: #ff8fab;
+  background: #9ba9ff;
+  font-family: "Josefin Sans", sans-serif;
   color: white;
   border: none;
   border-radius: 8px;
@@ -455,7 +461,9 @@ main {
   }
 
 .logout-btn:hover {
-    background: #ff8fab;
+    background: #eccaff;
+    color: #000;
+    box-shadow: 0 10px 25px #c4baff;
   }
 
 *,
@@ -472,26 +480,6 @@ main {
   gap: 20px;
   text-align: center;
 }
-
-@media only screen and (max-width: 700px) {
-.footer {
-   width: 590px;
-   padding: 45px 0px 30px 60px; 
-  }
-}
-@media only screen and (max-width: 600px) {
-.footer {
-   width: 425px;
-   padding: 45px 0px 30px 45px; 
-  
-   grid-template-columns: repeat(auto-fit, minmax(375px, 1fr));
-  }
-   .footer__list + .footer__list {
-    margin-top: 40px;
-  }
-}
-
-
 
 @media (max-width: 768px) {
 .navbar {
@@ -520,5 +508,9 @@ main {
 
 .login-container .right {
   padding: 2rem 1rem;
+  }
+
+.footer {
+  grid-template-columns: 1fr;
   }
 }
