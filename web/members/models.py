@@ -57,7 +57,16 @@ class finance(models.Model):
         return f"{self.user.firstname} {self.user.lastname}"
         return f"{self.comment} - {self.money} on {self.date}"
 
+class Message(models.Model):
+    sender = models.ForeignKey(Member, related_name='sent_messages', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(Member, related_name='received_messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.sender.login} → {self.receiver.login}"
+        
 @receiver(post_save, sender=Member)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

@@ -12,10 +12,9 @@ from django.shortcuts import redirect
 from django.views import View
 
 from .forms import UserRegistrationForm
-
-
-# Define registration here 
-from django.contrib import messages
+from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Member, Message
 
 def register(request):
     if request.method == 'POST':
@@ -61,6 +60,19 @@ def change_pass(request):
 def logout_view(request):
     logout(request)
     return redirect('login_view') 
+
+def search_view(request):
+    query = request.GET.get('q')
+    results = []
+
+    if query:
+        results = Member.objects.filter(
+            Q(login__icontains=query) |
+            Q(firstname__icontains=query) |
+            Q(lastname__icontains=query)
+        )
+
+    return render(request, 'search.html', {'results': results})
         
 @login_required
 @csrf_protect
@@ -71,12 +83,14 @@ def user_profile(request):
 
         action = request.POST.get("action")
 
+        # ---------------- BIO ----------------
         if action == "update_bio":
             bio = request.POST.get("bio")
             if bio:
                 profile.bio = bio
                 profile.save()
 
+        # ---------------- IMAGE ----------------
         elif action == "upload_image":
             if "profile_image" in request.FILES:
                 profile.profile_image = request.FILES["profile_image"]
@@ -86,24 +100,56 @@ def user_profile(request):
                 messages.error(request, "No file detected.")
 
         # ---------------- FINANCE ----------------
-        tab_money = request.POST.get('money')
-        tab_comment = request.POST.get('comment')
-        tab_date = request.POST.get('money_date')
+        elif action == "add_money":
+            tab_money = request.POST.get('money')
+            tab_comment = request.POST.get('comment')
+            tab_date = request.POST.get('money_date')
 
-        if tab_money and tab_comment and tab_date:
-            finance.objects.create(
-                profile=profile,
-                money=tab_money,
-                comment=tab_comment,
-                date=tab_date
-            )
-            messages.success(request, 'Financial entry added!')
-        elif any([tab_money, tab_comment, tab_date]):
-            messages.error(request, "All financial fields must be filled.")
+            if tab_money and tab_comment and tab_date:
+                finance.objects.create(
+                    profile=profile,
+                    money=tab_money,
+                    comment=tab_comment,
+                    date=tab_date
+                )
+                messages.success(request, 'Financial entry added!')
+            else:
+                messages.error(request, "All financial fields must be filled.")
 
+    # ---------------- SEARCH ----------------
+    query = request.GET.get('q')
+    results = []
+
+    if query:
+        results = Member.objects.filter(
+            Q(login__icontains=query) |
+            Q(firstname__icontains=query) |
+            Q(lastname__icontains=query)
+        ).exclude(id=request.user.id)  # avoid showing yourself
+
+    # ---------------- DATA ----------------
     financial_entries = profile.financial_entries.all()
 
     return render(request, 'members/index.html', {
         'profile': profile,
-        'financial_entries': financial_entries
+        'financial_entries': financial_entries,
+        'results': results  # ✅ NEW
     })
+    
+def send_message(request, member_id):
+    receiver = get_object_or_404(Member, id=member_id)
+
+    if request.method == "POST":
+        content = request.POST.get('content')
+
+        if content:
+            Message.objects.create(
+                sender=request.user,
+                receiver=receiver,
+                content=content
+            )
+            messages.success(request, "Message sent!")
+        else:
+            messages.error(request, "Empty message!")
+
+    return redirect('search')

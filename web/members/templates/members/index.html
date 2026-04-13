@@ -146,7 +146,31 @@ document.querySelectorAll(".modal-content").forEach(content => {
   });
 });
 </script>
+<section class="search-box">
+    <h3>Search users</h3>
 
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search users...">
+        <button type="submit">Search</button>
+    </form>
+
+    {% for user in results %}
+        <div class="entry">
+            <span>{{ user.login }}</span>
+            <span>{{ user.firstname }} {{ user.lastname }}</span>
+
+            <form method="GET">
+                {% csrf_token %}
+                <input type="text" name="content" placeholder="Message...">
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    {% empty %}
+        {% if request.GET.q %}
+            <p>No users found.</p>
+        {% endif %}
+    {% endfor %}
+</section>
 </body>
 </html>
 
