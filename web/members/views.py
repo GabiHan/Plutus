@@ -133,7 +133,7 @@ def user_profile(request):
     return render(request, 'members/index.html', {
         'profile': profile,
         'financial_entries': financial_entries,
-        'results': results  # ✅ NEW
+        'results': results  
     })
     
 def send_message(request, member_id):
