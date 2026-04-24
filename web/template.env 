@@ -1,0 +1,2 @@
+export SECRET_KEY = ''
+DATABASE_URL=postgresql://postgres:your_password@db.your-project-ref.supabase.co:5432/postgres
