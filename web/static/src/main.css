@@ -150,7 +150,6 @@ main {
   display: grid;
   grid-template-columns: 2fr 1fr;
   min-height: 92vh;
-  font-family: "Josefin Sans", sans-serif;
   }
 
 .login-container .left {
@@ -259,7 +258,6 @@ main {
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: "Josefin Sans", sans-serif;
   box-shadow: 0 8px 20px #abc4ff;
   position: relative;
   overflow: hidden;
@@ -283,7 +281,6 @@ main {
 .layout {
   display: flex;
   min-height: 100vh;
-  font-family: "Josefin Sans", sans-serif;
   background: #f4f4f4;
 }
 
@@ -423,7 +420,6 @@ main {
   }
 
 .add {
-  font-family: "Josefin Sans", sans-serif;
   background-color: #9ba9ff;
   color: white;
   cursor: pointer;
@@ -452,7 +448,6 @@ main {
   margin-top: 20px;
   padding: 10px;
   background: #9ba9ff;
-  font-family: "Josefin Sans", sans-serif;
   color: white;
   border: none;
   border-radius: 8px;
