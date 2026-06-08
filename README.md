@@ -46,3 +46,6 @@ py manage.py migrate
 
 #make migrations 
 py manage.py makemigrations 
+
+#create superuser 
+py manage.py createsuperuser 
