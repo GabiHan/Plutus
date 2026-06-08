@@ -34,7 +34,7 @@ When you pull the repository,
 load the command: "pip install -r requirements.txt" to automatically install what's needed mentionned in the requirement.txt.
 
 #Django configuration
-Run : "python -m venv .venv" to create your virtual environement
+Run : "source .venv/bin/activate" to create your virtual environement
 
 #run server
 Nodejs is also needed to run out build. If you still don't have nodeJS installed, install it.
