@@ -171,6 +171,49 @@ document.querySelectorAll(".modal-content").forEach(content => {
         {% endif %}
     {% endfor %}
 </section>
+
+<!-- Message modal -->
+<div id="msg-overlay" class="msg-overlay" hidden>
+  <div class="msg-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="msg-modal-header">
+      <span id="modal-title">New message</span>
+      <button type="button" id="modal-close">&times;</button>
+    </div>
+    <p id="modal-to"></p>
+    <form id="msg-form" method="POST" action="">
+      {% csrf_token %}
+      <textarea name="content" placeholder="Write your message..." required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const overlay = document.getElementById('msg-overlay');
+const form    = document.getElementById('msg-form');
+const modalTo = document.getElementById('modal-to');
+
+document.querySelectorAll('.msg-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id    = btn.dataset.id;
+    const name  = btn.dataset.name;
+    const login = btn.dataset.login;
+    modalTo.textContent = `To: ${name} (@${login})`;
+    form.action = `/messages/send/${id}/`;   // adjust to your URL
+    form.querySelector('textarea').value = '';
+    overlay.hidden = false;
+    form.querySelector('textarea').focus();
+  });
+});
+
+document.getElementById('modal-close').addEventListener('click', () => overlay.hidden = true);
+overlay.addEventListener('click', e => { if (e.target === overlay) overlay.hidden = true; });
+</script>
+<script>
+  const sendUrl = "{% url 'send_message' 0 %}";   // "0" as placeholder
+  // then replace:
+  form.action = sendUrl.replace('/0/', `/${id}/`);
+</script>
 </body>
 </html>
 
